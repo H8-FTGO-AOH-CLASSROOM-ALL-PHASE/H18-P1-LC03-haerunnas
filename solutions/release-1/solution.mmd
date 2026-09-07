@@ -1,0 +1,42 @@
+erDiagram
+    Patients ||--o{ Appointments : makes
+    Doctors ||--|{ Appointments : scheduled_with
+    
+    Patients ||--o{ Treatments : receives
+    Doctors ||--o{ Treatments : provides
+    
+    Patients ||--o{ Billing : incurred_by
+    Treatments ||--|| Billing : generates
+    
+    Patients {
+        int PatienId PK
+        string Name
+        date DateofBirth
+        text MedicalHistory
+    }
+    Doctors {
+        int DoctorId PK
+        string Name
+        string Speciality
+        string Availability
+    }
+    Appointments {
+        int AppointmentId PK
+        int PatienId FK
+        int DoctorId FK
+        date Date
+        time Time
+    }
+    Treatments {
+        int TreatmentId PK
+        int PatienId FK
+        int DoctorId FK
+        text Diagnosis
+        text Medication
+    }
+    Billing {
+      int BillId PK
+      int PatienId FK
+      int TreatmentId FK
+      decimal Amount
+    }
